@@ -38,10 +38,13 @@ psql database-name < database-dump
 # Update Deployment
 
 ```
-git pull
-npm ci
-npm run build
-pm2 restart --update-env <name-of-pm2-process>
+git pull // update files
+npm ci // clean install all dependencies
+npm update // if required
+npm audit fix // if required
+npx directus database migrate:latest // update directus database
+npm run build // build application
+pm2 restart --update-env <name-of-pm2-process> // restart process
 ```
 
 
