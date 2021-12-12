@@ -1,8 +1,9 @@
-import { signIn, useSession } from "next-auth/client";
+import { signIn, useSession } from "next-auth/react";
 
 export default function useRedirectIfNotLoggedIn() {
-    const [session, isLoading] = useSession()
+    const { data: session, status } = useSession()
 
+    const isLoading = status === "loading"
     if (!session && !isLoading) {
         signIn()
     }

@@ -33,16 +33,7 @@ createdb database-name
 psql database-name < database-dump 
 ```
 
-3. Fill in the following for the `.env` file
-
-```
-DIRECTUS_EMAIL=
-DIRECTUS_PASSWORD=
-DIRECTUS_URL=
-DB_DATABASE=
-DB_USER=
-DB_PASSWORD=
-```
+3. Fill up the remaining blanks in `.env`
 
 # Update Deployment
 

@@ -1,12 +1,11 @@
-import { useSession } from 'next-auth/client'
-import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import Layout from '../../components/Layout'
 import useRedirectIfNotLoggedIn from '../../hooks/useRedirectIfNotLoggedIn'
 
 export default function index() {
-    const [session, isLoading] = useSession()
     useRedirectIfNotLoggedIn()
+    const { data: session } = useSession()
 
     const manageBilling = async () => {
         window.location.href = `/api/products/subscribed?customer_email=${session.user.email}&return_url=${window.location.href}`

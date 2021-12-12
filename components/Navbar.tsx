@@ -1,4 +1,4 @@
-import { useSession, signOut, signIn } from 'next-auth/client'
+import { useSession, signOut, signIn } from 'next-auth/react'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -13,9 +13,10 @@ const links = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const [session, isLoading] = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter()
 
+    const isLoading = status === "loading"
     const isLoggedIn = session !== null
     const user = session?.user
     return (

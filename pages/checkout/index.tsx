@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { loadStripe, StripeError } from '@stripe/stripe-js'
 import useSWR from 'swr'
 import Layout from '../../components/Layout'
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 import useRedirectIfNotLoggedIn from '../../hooks/useRedirectIfNotLoggedIn'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function checkout() {
     useRedirectIfNotLoggedIn()
-    const [session, isLoading] = useSession()
+    const { data: session } = useSession()
 
     const [createSessionError, setCreateSessionError] = useState<StripeError | null>(null)
     const handleCheckout = (price_id: string) => async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

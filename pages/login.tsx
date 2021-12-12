@@ -1,5 +1,5 @@
 import React from 'react'
-import { providers, signIn, getSession, csrfToken, ClientSafeProvider } from 'next-auth/client'
+import { getProviders, signIn, getSession, getCsrfToken, ClientSafeProvider } from 'next-auth/react'
 import Layout from '../components/Layout'
 import { formatDate, getCollection } from '../utils'
 import { Announcement } from '../constants'
@@ -60,14 +60,12 @@ export async function getServerSideProps(context) {
     const session = await (getSession({ req }))
 
     if (session && res) {
-        res.writeHead(302, {
-            Location: "/"
-        })
-
-        res.end();
         return {
-            props: {}
-        };
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        }
     }
 
     const { data: announcements } = await getCollection('announcements', { sort: '-date_created' })
@@ -75,8 +73,8 @@ export async function getServerSideProps(context) {
     return {
         props: {
             session: null,
-            providers: await providers(),
-            csrfToken: await csrfToken(context),
+            providers: await getProviders(),
+            csrfToken: await getCsrfToken(context),
             announcements
         }
     }
