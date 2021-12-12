@@ -39,6 +39,7 @@ psql database-name < database-dump
 
 ```
 git pull
+npm ci
 npm run build
 pm2 restart --update-env <name-of-pm2-process>
 ```

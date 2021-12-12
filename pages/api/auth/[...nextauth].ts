@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth'
+import { NextAuthOptions } from 'next-auth/core/types'
 import GoogleProvider from "next-auth/providers/google"
 import { createUser, getUsers } from '../../../utils'
 
@@ -11,9 +12,6 @@ export default NextAuth({
     })
     // ...add more providers here
   ],
-  jwt: {
-    encryption: true
-  },
   secret: process.env.NEXTAUTH_SECRET,
   // A database is optional, but required to persist accounts in a database
   database: process.env.DATABASE_URL,
@@ -40,4 +38,4 @@ export default NextAuth({
       return session
     }
   }
-})
+} as NextAuthOptions)
